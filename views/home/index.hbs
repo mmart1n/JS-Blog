@@ -1,0 +1,25 @@
+<div class="container body-content">
+    <div class="row">
+        {{#each articles}}
+            <div class="col-md-6 custom">
+                <article>
+                    <header>
+                        <h2 style = "margin-top: 7px; margin-bottom: 5px;">{{this.title}}</h2>
+                    </header>
+                    <snall class = "author">
+                        {{dateFormat createdAt "HH:mm, DD-MM-YYYY"}}
+                    </snall>
+                    <img src="{{this.image}}" width = 100%, height = 300px>
+                    <p class="article-body"><br/>{{this.content}}<br/><br/>
+                    </p>
+                    <footer>
+                        <span style="color: #b4bcc2">Written by: {{this.User.fullName}}</span><div class="pull-right">
+                            <a class="btn btn-default btn-xs" href="/article/details/{{this.id}}">Read more &raquo;</a>
+                        </div>
+                    </footer>
+                </article>
+            </div>
+        {{/each}}
+    </div>
+    <br>
+</div>

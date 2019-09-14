@@ -1,0 +1,50 @@
+<div class="container body-content">
+    <div class="row">
+        <div class="col-md-10 col-md-offset-1">
+            <article>
+                <header>
+                    <h2>{{title}}</h2><br/>
+                </header>
+                <img src = "{{image}}" width="80%", height="auto" style="left: 10%; position: relative;"/>
+                <p>
+                    <br/>{{content}}<br/><br/>
+                </p>
+                <snall class = "author">
+                    {{dateFormat updatedAt "HH:mm, DD-MM-YYYY"}}
+                </snall>
+                <footer>
+                    <span style="color: #b4bcc2">Written by: {{User.fullName}}</span>
+                </footer>
+            </article>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-10 col-md-offset-1" style="margin-top: 50px;">
+            {{#each Comments}}
+                <p>{{this.content}}</p>
+                <p>Posted by: {{User.fullName}} on {{dateFormat updatedAt "HH:mm, DD-MM-YYYY"}}</p>
+            {{/each}}
+            {{#if user}}
+                <form class="form-horizontal" method="post" action="/article/details/{{id}}/comment/add">
+                    <fieldset>
+                        <div class="form-group">
+                            <textarea class="form-control" placeholder="Comment..." id="articleContent" rows="5" name="content" required></textarea>
+                        </div>
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-primary">Add Comment</button>
+                        </div>
+                    </fieldset>
+                    <div class="pull-right">
+                        <a class="btn btn-default btn-xs" href="/">Back &raquo;</a>
+                    </div>
+                </form>
+            {{/if}}
+            {{#unless user}}
+                <span style="font-size: large">To add comments please Log In!</span>
+                <div class="pull-right">
+                    <a class="btn btn-default btn-xs" href="/">Back &raquo;</a>
+                </div>
+            {{/unless}}
+        </div>
+    </div>
+</div>
