@@ -86,18 +86,49 @@ module.exports = {
         })
     },
 
-    articleDeleteGet: (req,res) =>{
+    logout: (req, res) => {
+        req.logOut();
+        res.redirect('/');
+    },
+
+    articleDeleteGet: (req,res) => {
         let articleId = req.params.id;
         Article.destroy({where: {id: articleId}})
             .then(articles => {
-                res.render('home');
+                res.redirect('/');
             }).catch(err => {
             console.log(err.message);
         })
     },
 
-    logout: (req, res) => {
-        req.logOut();
-        res.redirect('/');
+    articleEditGet: (req, res) => {
+        let articleId = req.params.id;
+        Article.findOne({where: {id: articleId}})
+            .then(publication => {
+                res.render(`article/edit`, {article: publication});
+            })
+            .catch(err => {
+                console.log(err.message);
+            });
+    },
+
+    articleEditPost: (req, res) => {
+        let articleArguments = req.body;
+        let articleId = req.params.id;
+        Article.update(
+            { 
+                title: articleArguments.title,
+                image: articleArguments.image,
+                content: articleArguments.content
+            },
+            { where: { id: articleId } }
+          )
+            .then(result =>
+              res.redirect('/')
+            )
+            .catch(err =>
+              handleError(err)
+            )
     }
+
 };
