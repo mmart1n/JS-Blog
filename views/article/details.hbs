@@ -3,13 +3,23 @@
         <div class="col-md-10 col-md-offset-1">
             <article>
                 <header>
-                    <h2>{{title}}</h2><br/>
+                    <div class="header-container">
+                        <div class="header-title">
+                            <h2>{{title}}</h2><br />
+                        </div>
+                        {{#ifeq user.dataValues.id User.id}}
+                        <div class="header-nav">
+                            <a class="btn btn-success btn-xs" href="/article/details/{{this.id}}">Edit</a>
+                            <a class="btn btn-danger btn-xs" href="/article/details/{{this.id}}">Delete</a>
+                        </div>
+                        {{/ifeq}}
+                    </div>
                 </header>
-                <img src = "{{image}}" width="80%", height="auto" style="left: 10%; position: relative;"/>
+                <img src="{{image}}" width="80%" , height="auto" style="left: 10%; position: relative;" />
                 <p>
-                    <br/>{{content}}<br/><br/>
+                    <br />{{content}}<br /><br />
                 </p>
-                <snall class = "author">
+                <snall class="author">
                     {{dateFormat updatedAt "HH:mm, DD-MM-YYYY"}}
                 </snall>
                 <footer>
@@ -20,30 +30,34 @@
     </div>
     <div class="row">
         <div class="col-md-10 col-md-offset-1" style="margin-top: 50px;">
+            {{#unless Comments}}
+            <p>No comments yet...</p>
+            {{/unless}}
             {{#each Comments}}
-                <p>{{this.content}}</p>
-                <p>Posted by: {{User.fullName}} on {{dateFormat updatedAt "HH:mm, DD-MM-YYYY"}}</p>
+            <p>{{this.content}}</p>
+            <p>Posted by: {{User.fullName}} on {{dateFormat updatedAt "HH:mm, DD-MM-YYYY"}}</p>
             {{/each}}
             {{#if user}}
-                <form class="form-horizontal" method="post" action="/article/details/{{id}}/comment/add">
-                    <fieldset>
-                        <div class="form-group">
-                            <textarea class="form-control" placeholder="Comment..." id="articleContent" rows="5" name="content" required></textarea>
-                        </div>
-                        <div class="form-group">
-                            <button type="submit" class="btn btn-primary">Add Comment</button>
-                        </div>
-                    </fieldset>
-                    <div class="pull-right">
-                        <a class="btn btn-default btn-xs" href="/">Back &raquo;</a>
+            <form class="form-horizontal" method="post" action="/article/details/{{id}}/comment/add">
+                <fieldset>
+                    <div class="form-group">
+                        <textarea class="form-control" placeholder="Comment..." id="articleContent" rows="5"
+                            name="content" required></textarea>
                     </div>
-                </form>
-            {{/if}}
-            {{#unless user}}
-                <span style="font-size: large">To add comments please Log In!</span>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary">Add Comment</button>
+                    </div>
+                </fieldset>
                 <div class="pull-right">
                     <a class="btn btn-default btn-xs" href="/">Back &raquo;</a>
                 </div>
+            </form>
+            {{/if}}
+            {{#unless user}}
+            <span style="font-size: large">To add comments please Log In!</span>
+            <div class="pull-right">
+                <a class="btn btn-default btn-xs" href="/">Back &raquo;</a>
+            </div>
             {{/unless}}
         </div>
     </div>

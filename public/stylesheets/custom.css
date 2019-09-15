@@ -1,0 +1,13 @@
+.header-container {
+    display: inline-block;
+    width: 100%;
+}
+
+.header-title {
+    float: left;
+}
+
+.header-nav {
+    float: right;
+    line-height: 76px;
+}
