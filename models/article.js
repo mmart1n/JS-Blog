@@ -31,7 +31,8 @@ module.exports = function(sequelize){
         });
         Article.hasMany(models.Comment, {
             foreignKey: 'articleId',
-            sourceKey: 'id'
+            sourceKey: 'id',
+            onDelete: 'CASCADE'
         });
     };
 

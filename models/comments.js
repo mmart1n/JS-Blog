@@ -21,7 +21,8 @@ module.exports = (sequelize) => {
         });
         Comment.belongsTo(models.Article, {
             foreignKey: 'articleId',
-            targetKey: 'id'
+            targetKey: 'id',
+            onDelete: 'CASCADE'
         });
     };
     return Comment;

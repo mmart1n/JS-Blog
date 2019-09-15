@@ -86,6 +86,16 @@ module.exports = {
         })
     },
 
+    articleDeleteGet: (req,res) =>{
+        let articleId = req.params.id;
+        Article.destroy({where: {id: articleId}})
+            .then(articles => {
+                res.render('home');
+            }).catch(err => {
+            console.log(err.message);
+        })
+    },
+
     logout: (req, res) => {
         req.logOut();
         res.redirect('/');

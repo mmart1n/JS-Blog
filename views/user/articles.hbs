@@ -19,7 +19,7 @@
                     <div class="pull-right">
                         {{#ifeq this.authorId this.User.id}}
                             <a class="btn btn-success btn-xs" href="/article/details/{{this.id}}">Edit</a>
-                            <a class="btn btn-danger btn-xs" href="/article/details/{{this.id}}">Delete</a>
+                            <a class="btn btn-danger btn-xs" href="/article/delete/{{this.id}}">Delete</a>
                         {{/ifeq}}
                         <a class="btn btn-default btn-xs" href="/article/details/{{this.id}}">Read more &raquo;</a>
                     </div>
